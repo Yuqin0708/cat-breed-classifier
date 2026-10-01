@@ -53,8 +53,14 @@ Maine Coon、Persian、Ragdoll、Russian Blue、Siamese、Sphynx
 
 ### 1. 下載模型權重
 
-模型權重 `resnet50-model-augmentation.pth`（約 90MB）未放在 repo 中，
-將另外提供下載，請放到 `backend/models/`。
+模型權重未放在 repo 中，請從 [Release v1.0.0](https://github.com/Yuqin0708/cat-breed-classifier/releases/tag/v1.0.0)
+下載 `resnet50-model-augmentation.pth`（約 90MB），放到 `backend/models/`：
+
+```
+backend/
+└── models/
+    └── resnet50-model-augmentation.pth
+```
 
 ### 2. 啟動後端
 
