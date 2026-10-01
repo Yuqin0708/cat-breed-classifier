@@ -1,0 +1,30 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+frontend/dist/
+
+# 機密
+.env
+.env.*
+!.env.example
+
+# 模型權重（放 GitHub Release）
+*.pth
+*.h5
+backend/models/
+
+# 訓練資料集（只忽略這個位置，不影響 frontend/src/data/）
+/training/data/
+*.tar.gz
+
+# 執行時上傳的圖片
+uploaded_*
+
+# 編輯器
+.vscode/
+.idea/
