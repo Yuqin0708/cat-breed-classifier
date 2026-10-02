@@ -7,6 +7,7 @@
 
 前端透過 GitHub Pages 自動部署:https://yuqin0708.github.io/cat-breed-classifier/
 線上版沒有部署後端,「上傳照片辨識」需在本機啟動 backend 才能使用;後端完整程式碼在 `backend/`。
+https://canva.link/d2terh6d13m85ke
 
 ## 技術棧
 
