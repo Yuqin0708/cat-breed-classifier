@@ -13,6 +13,8 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // GitHub Pages 會把網站放在 /<repo名>/ 底下,由 CI 透過 VITE_BASE 傳入
+  base: process.env.VITE_BASE || "/",
   plugins: [
     VueRouter({
       dts: 'src/typed-router.d.ts',

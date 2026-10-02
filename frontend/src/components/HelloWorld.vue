@@ -759,7 +759,7 @@ const identifyCat = async () => {
     }
   } catch (error) {
     console.error("識別過程出錯:", error);
-    // 錯誤處理
+    alert("無法連線到辨識服務。線上展示版沒有部署後端,請在本機啟動 backend 後再試。");
   } finally {
     isLoading.value = false;
   }

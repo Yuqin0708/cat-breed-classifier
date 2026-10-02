@@ -3,6 +3,11 @@
 上傳一張貓咪照片，辨識牠屬於 12 種常見品種中的哪一種，並顯示品種介紹與推薦產品。
 當模型的最高機率低於 75% 時，判定為米克斯（混種貓）。
 
+## 線上展示
+
+前端透過 GitHub Pages 自動部署:https://yuqin0708.github.io/cat-breed-classifier/
+線上版沒有部署後端,「上傳照片辨識」需在本機啟動 backend 才能使用;後端完整程式碼在 `backend/`。
+
 ## 技術棧
 
 | 層級 | 技術 |
@@ -92,7 +97,7 @@ yarn dev
 - `training/resnet18_transfer_learning.ipynb`：ResNet18 遷移學習實驗，在 Google Colab 執行。
   使用 ImageNet 預訓練的 ResNet18，替換最後的全連接層，並使用資料增強
   （RandomHorizontalFlip、RandomRotation）。此實驗與後端部署的 ResNet50 是不同的模型。
-- ResNet50 權重的訓練程式未包含在此 repo 中。
+- ResNet50 權重的訓練筆記本(Google Colab):[開啟 Colab](https://colab.research.google.com/drive/1nHxVBh7UHsBoPK0uWcH4dUCxEPCvbJyw?usp=sharing)
 
 ## 備註
 
