@@ -87,18 +87,39 @@ yarn dev
 
 ## 模型與訓練
 
-- 推論模型：後端使用 torchvision 的 ResNet50 架構，最後一層替換為 12 類輸出
-  （Linear + LogSoftmax），載入訓練好的權重檔。
+### 來源說明
+
+本專案的模型訓練流程以開源專案
+[Cat Breed Classification Using CNN](https://gitlab.com/willyfitrahendria/cat-breed-classification-using-cnn)
+（Willy Fitra Hendria，2020）為基礎，並非自行設計。
+
 - 資料集：[Oxford-IIIT Pet Dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/)，取其中 12 種貓
   （資料集不附在 repo 中）。
-- `training/CBC.py`：下載並解壓縮 Oxford-IIIT Pet 資料集。
-- `training/train_cnn.py`：篩選 12 種貓的影像，使用資料增強（RandomHorizontalFlip、ColorJitter），
+- 訓練方法（沿用上述專案）：以 ImageNet 預訓練的 ResNet50，凍結主幹並將最後一層替換為 12 類輸出
+  （Linear + LogSoftmax），以 5-fold 分層交叉驗證搭配 Grid Search 選擇超參數
+  （batch size 32／64、學習率 1e-3／1e-4、最多 50 epochs），並比較有無資料增強
+  （RandomHorizontalFlip、ColorJitter）。後端部署的是含資料增強的版本。
+- 我在 Google Colab 執行此流程、加入中文註解與推論程式並匯出權重：
+  [ResNet50 訓練筆記本（Colab）](https://colab.research.google.com/drive/1nHxVBh7UHsBoPK0uWcH4dUCxEPCvbJyw?usp=sharing)。
+  該筆記本內容為上述開源專案的修改版。
+- 上述專案報告的測試結果供參考（本 repo 未另行重新評估）：簡單 CNN 約 27%、ResNet50 約 86%、
+  ResNet50＋資料增強約 88%（Top-3 約 97%）。
+
+### 本專案自行完成的部分
+
+- FastAPI 推論服務（圖片前處理、機率計算，以及「最高機率低於 75% 判定為米克斯」的門檻）。
+- Vue 3＋Vuetify 前端、GitHub Pages 部署。
+- 模型權重以 GitHub Release 發佈與使用說明。
+
+### `training/` 目錄
+
+- `CBC.py`：下載並解壓縮 Oxford-IIIT Pet 資料集。
+- `train_cnn.py`：篩選 12 種貓的影像，使用資料增強（RandomHorizontalFlip、ColorJitter），
   以 Grid Search 搭配 5-fold 交叉驗證訓練 Simple CNN 基準模型。
-  此腳本參考網路教學修改而成。
-- `training/resnet18_transfer_learning.ipynb`：ResNet18 遷移學習實驗，在 Google Colab 執行。
+  改編自上述開源專案。
+- `resnet18_transfer_learning.ipynb`：ResNet18 遷移學習實驗，在 Google Colab 執行。
   使用 ImageNet 預訓練的 ResNet18，替換最後的全連接層，並使用資料增強
   （RandomHorizontalFlip、RandomRotation）。此實驗與後端部署的 ResNet50 是不同的模型。
-- ResNet50 權重的訓練筆記本(Google Colab):[開啟 Colab](https://colab.research.google.com/drive/1nHxVBh7UHsBoPK0uWcH4dUCxEPCvbJyw?usp=sharing)
 
 ## 備註
 
